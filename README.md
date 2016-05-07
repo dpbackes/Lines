@@ -1,13 +1,9 @@
-# README
-## This is the README for your extension "lines"
-You can author your README using Visual Studio Code.  Here are some useful editor keyboard shortcuts:
+#Lines
+Lines allows you to quickly remove lines from the current document.
 
-* Split the editor (`Cmd+\` on OSX or `Ctrl+\` on Windows and Linux)
-* Toggle preview (`Shift+CMD+V` on OSX or `Shift+Ctrl+V` on Windows and Linux)
-* Press `Ctrl+Space` (Windows, Linux) or `Cmd+Space` (OSX) to see a list of Markdown snippets
+##Commands
+`lines remove`
+- Opens a prompt. Lines that contain the text string that is entered in the prompt will be removed.
 
-### For more information
-* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-* [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
-
-**Enjoy!**
+`lines remove inverse`
+- Opens a prompt. Lines that *do not* contain the text string that is entered in the prompt will be removed.
