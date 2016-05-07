@@ -1,8 +1,8 @@
 {
     "name": "lines",
     "displayName": "Lines",
-    "description": "Perform lines based operations. (mark, delete, etc.)",
-    "version": "0.0.1",
+    "description": "Perform line based operations. (mark, delete, etc.)",
+    "version": "0.0.3",
     "publisher": "DanBackes",
     "engines": {
         "vscode": "^1.0.0"
