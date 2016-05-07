@@ -12,7 +12,10 @@
     ],
     "activationEvents": [
         "onCommand:extension.linesRemove",
-        "onCommand:extension.linesRemoveInverse"
+        "onCommand:extension.linesRemoveInverse",
+        "onCommand:extension.linesMark",
+        "onCommand:extension.linesClearMarks",
+        "onCommand:extension.linesRemoveMarked"
     ],
     "main": "./out/src/extension",
     "contributes": {
@@ -23,6 +26,18 @@
         {
             "command": "extension.linesRemoveInverse",
             "title": "lines remove inverse"
+        },
+        {
+            "command": "extension.linesMark",
+            "title": "lines mark"
+        },
+        {
+            "command": "extension.linesClearMarks",
+            "title": "lines clear marks"
+        },
+        {
+            "command": "extension.linesRemoveMarked",
+            "title": "lines remove marked"
         }]
     },
     "scripts": {
