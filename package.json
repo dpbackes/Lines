@@ -11,13 +11,18 @@
         "Other"
     ],
     "activationEvents": [
-        "onCommand:extension.linesRemove"
+        "onCommand:extension.linesRemove",
+        "onCommand:extension.linesRemoveInverse"
     ],
     "main": "./out/src/extension",
     "contributes": {
         "commands": [{
             "command": "extension.linesRemove",
             "title": "lines remove"
+        },
+        {
+            "command": "extension.linesRemoveInverse",
+            "title": "lines remove inverse"
         }]
     },
     "scripts": {

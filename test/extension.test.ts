@@ -9,6 +9,17 @@ import * as vscode from 'vscode';
 import { Lines } from '../src/lines';
 
 suite("Extension Tests", () => {
+    teardown(() => {
+        const start    = new vscode.Position(0, 0);
+        const lastLine = vscode.window.activeTextEditor.document.lineCount - 1;
+        const end      = vscode.window.activeTextEditor.document.lineAt(lastLine).range.end;
+        const range    = new vscode.Range(start, end);
+
+        return vscode.window.activeTextEditor.edit(editBuilder => {
+            editBuilder.delete(range);
+        });
+    });
+    
     test("remove lines", async () => {
         await Insert("remove\n");
         await Insert("keep\n");
@@ -20,6 +31,19 @@ suite("Extension Tests", () => {
 
         await Lines.Remove("remove");
         assertEqualLines(["keep", "keep", "keep", ""]);
+    });
+
+    test("remove lines inverse", async () => {
+        await Insert("remove\n");
+        await Insert("keep\n");
+        await Insert("keep\n");
+        await Insert("remove\n");
+        await Insert("remove\n");
+        await Insert("keep\n");
+        await Insert("remove\n");
+
+        await Lines.RemoveInverse("keep");
+        assertEqualLines(["keep", "keep", "keep"]);
     });
 });
 
@@ -35,6 +59,6 @@ function assertEqualLines(expectedLines: string[]) {
     for (let i = 0; i < expectedLines.length; i++) {
         var expected = expectedLines[i];
         var actual = vscode.window.activeTextEditor.document.lineAt(i).text;
-        assert.equal(expected, actual);
+        assert.equal(actual, expected);
     }
 }
