@@ -2,7 +2,7 @@
     "name": "lines",
     "displayName": "Lines",
     "description": "Perform line based operations. (mark, delete, etc.)",
-    "version": "0.0.3",
+    "version": "0.0.5",
     "publisher": "DanBackes",
     "engines": {
         "vscode": "^1.0.0"
@@ -10,6 +10,17 @@
     "categories": [
         "Other"
     ],
+    "keywords": [
+        "lines",
+        "delete",
+        "remove",
+        "mark"
+    ],
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/dpbackes/Lines"
+    },
+    "homepage": "https://github.com/dpbackes/Lines",
     "activationEvents": [
         "onCommand:extension.linesRemove",
         "onCommand:extension.linesRemoveInverse",
