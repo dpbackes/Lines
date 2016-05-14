@@ -2,7 +2,7 @@
     "name": "lines",
     "displayName": "Lines",
     "description": "Perform line based operations. (mark, delete, etc.)",
-    "version": "0.0.5",
+    "version": "0.0.6",
     "publisher": "DanBackes",
     "engines": {
         "vscode": "^1.0.0"
@@ -26,7 +26,8 @@
         "onCommand:extension.linesRemoveInverse",
         "onCommand:extension.linesMark",
         "onCommand:extension.linesClearMarks",
-        "onCommand:extension.linesRemoveMarked"
+        "onCommand:extension.linesRemoveMarked",
+        "onCommand:extension.linesRemoveUnmarked"
     ],
     "main": "./out/src/extension",
     "contributes": {
@@ -49,6 +50,10 @@
         {
             "command": "extension.linesRemoveMarked",
             "title": "lines remove marked"
+        },
+        {
+            "command": "extension.linesRemoveUnmarked",
+            "title": "lines remove unmarked"
         }]
     },
     "scripts": {

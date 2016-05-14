@@ -43,17 +43,18 @@ suite("Extension Tests", () => {
         await Insert("remove\n");
 
         await Lines.RemoveInverse("keep");
-        assertEqualLines(["keep", "keep", "keep"]);
+        assertEqualLines(["keep", "keep", "keep", ""]);
     });
 
     test("remove marked lines", async () => {
         Lines.MarkDecorationType = vscode.window.createTextEditorDecorationType({
             overviewRulerLane: vscode.OverviewRulerLane.Full,
         });
-        
+
         await Insert("remove\n");
         await Insert("keep\n");
         await Insert("keep\n");
+        await Insert("keep remove\n");
         await Insert("remove\n");
         await Insert("remove\n");
         await Insert("keep\n");
@@ -63,6 +64,25 @@ suite("Extension Tests", () => {
         await Lines.RemoveMarked();
 
         assertEqualLines(["keep", "keep", "keep", ""]);
+    });
+
+    test("remove unmarked lines", async () => {
+        Lines.MarkDecorationType = vscode.window.createTextEditorDecorationType({
+            overviewRulerLane: vscode.OverviewRulerLane.Full,
+        });
+
+        await Insert("remove\n");
+        await Insert("keep\n");
+        await Insert("keep\n");
+        await Insert("remove\n");
+        await Insert("remove keep\n");
+        await Insert("keep\n");
+        await Insert("remove\n");
+
+        await Lines.Mark("keep");
+        await Lines.RemoveUnmarked();
+
+        assertEqualLines(["keep", "keep", "remove keep", "keep", ""]);
     });
 });
 

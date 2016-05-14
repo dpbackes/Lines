@@ -70,21 +70,64 @@ export class Lines {
         Lines.ApplyMarks(doc);
     }
 
-    private static async RemoveOnCondition(condition: (lineText: string) => boolean): Promise<boolean> {
-        return vscode.window.activeTextEditor.edit(builder => {
-            var doc = vscode.window.activeTextEditor.document;
+    static async RemoveUnmarked() {
+        var doc = vscode.window.activeTextEditor.document;
 
-            for(var i = 0; i < doc.lineCount; i++) {
-                if(condition(doc.lineAt(i).text)) {
-                    if(i > 0) {
-                        builder.delete(new vscode.Range(i - 1, doc.lineAt(i - 1).text.length, i , doc.lineAt(i).text.length));
-                        continue;
-                    }
+        if(!Lines.markMap[doc.fileName] || Lines.markMap[doc.fileName].length == 0) {
+            return;
+        }
 
-                    builder.delete(new vscode.Range(i, 0, i + 1, 0));
+        await Lines.RemoveOnCondition(text => {
+            for (var index = 0; index < Lines.markMap[doc.fileName].length; index++) {
+                var pattern = Lines.markMap[doc.fileName][index];
+
+                if(text.indexOf(pattern) >= 0) {
+                    return false;
                 }
             }
+
+            return true;
         });
+
+        Lines.markMap[doc.fileName] = new Array<string>();
+
+        Lines.ApplyMarks(doc);
+    }
+
+    private static async RemoveOnCondition(condition: (lineText: string) => boolean): Promise<boolean> {
+        var doc = vscode.window.activeTextEditor.document;
+
+        var rangesToDelete = new Array<vscode.Range>();
+
+        var rangeStart: vscode.Position = null;
+
+        for(var currentLine = 0; currentLine < doc.lineCount; currentLine++) {
+            if(condition(doc.lineAt(currentLine).text)) {
+                if(rangeStart == null)
+                {
+                    rangeStart = new vscode.Position(currentLine, 0);
+                }
+            }
+            else if(rangeStart != null)
+            {
+                rangesToDelete.push(new vscode.Range(rangeStart, new vscode.Position(currentLine, 0)));
+
+                rangeStart = null;
+            }
+        }
+
+        if(rangeStart != null)
+        {
+            var end = new vscode.Position(doc.lineCount, doc.lineAt(doc.lineCount - 1).text.length);
+
+            rangesToDelete.push(new vscode.Range(rangeStart, end));
+        }
+
+        var result = await vscode.window.activeTextEditor.edit(builder => {
+            rangesToDelete.forEach(range => builder.delete(range));
+        });
+
+        return result;
     }
 
     private static ApplyMarks(doc : vscode.TextDocument) {

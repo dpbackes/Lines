@@ -17,4 +17,7 @@ Lines allows you to quickly remove lines from the current document.
 `lines remove marked`
 - Removes marked lines.
 
+`lines remove unmark`
+- Removes unmarked lines.
+
 

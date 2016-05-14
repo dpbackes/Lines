@@ -43,12 +43,18 @@ export function activate(context: vscode.ExtensionContext) {
         });
 
     context.subscriptions.push(linesClearMarks);
-    
+
     let linesRemoveMarked = vscode.commands.registerCommand('extension.linesRemoveMarked', variable => {
             Lines.RemoveMarked();
         });
 
     context.subscriptions.push(linesRemoveMarked);
+
+    let linesRemoveUnmarked = vscode.commands.registerCommand('extension.linesRemoveUnmarked', variable => {
+            Lines.RemoveUnmarked();
+        });
+
+    context.subscriptions.push(linesRemoveUnmarked);
 }
 
 export function deactivate() {
