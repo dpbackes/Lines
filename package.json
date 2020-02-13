@@ -33,27 +33,27 @@
     "contributes": {
         "commands": [{
             "command": "extension.linesRemove",
-            "title": "lines remove"
+            "title": "Lines Remove"
         },
         {
             "command": "extension.linesRemoveInverse",
-            "title": "lines remove inverse"
+            "title": "Lines Remove Inverse"
         },
         {
             "command": "extension.linesMark",
-            "title": "lines mark"
+            "title": "Lines Mark"
         },
         {
             "command": "extension.linesClearMarks",
-            "title": "lines clear marks"
+            "title": "Lines Clear Marks"
         },
         {
             "command": "extension.linesRemoveMarked",
-            "title": "lines remove marked"
+            "title": "Lines Remove Marked"
         },
         {
             "command": "extension.linesRemoveUnmarked",
-            "title": "lines remove unmarked"
+            "title": "Lines Remove Unmarked"
         }]
     },
     "scripts": {
